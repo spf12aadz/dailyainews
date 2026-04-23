@@ -53,8 +53,10 @@ Full contract: [`.claude/skills/daily-ai-news/SKILL.md`](./.claude/skills/daily-
 - **Routine-compatible only.** No `Bash`, no shell, no `git` CLI, ever. If the tool isn't on the allow-list in the skill, don't use it.
 - **GitHub connector missing → abort.** The skill refuses to run without commit capability and logs why.
 - **LINE env missing → skip cleanly.** Commit still happens; LINE step is no-op.
-- **LINE API non-200 → loud failure.** Status and response body are printed; the skill does **not** retry silently.
-- **No fabricated URLs.** Every cited link is fetched and verified before it lands in the article.
+- **LINE API non-200 or egress-blocked → loud failure.** Status/reason is printed; a `🔕 LINE not delivered` marker is appended to the committed article; no retry.
+- **No fabricated URLs.** Every cited URL is either fetched (Tier 1) or present in a live `WebSearch` result for a trusted-source domain (Tier 2). A URL never appears unless a search engine also returned it.
+- **Verification mode is visible.** Commit messages include `[verify=webfetch]` or `[verify=search]`; when the whole runtime is egress-blocked (`WEBFETCH_BLOCKED`), the article itself carries a banner.
+- **Idempotent.** Re-runs on the same day don't duplicate: identical content is a NO-OP, different content updates via SHA.
 - **Timezone is `Asia/Bangkok`** everywhere the date is computed.
 
 ## Running in Claude Web Routine
@@ -137,9 +139,11 @@ If `line-test` passes and `daily-ai-news` still skips LINE, that's a `daily-ai-n
 ## Troubleshooting
 
 - **"GitHub connector is not connected" on every run.** The connector authorization expired or was scoped to a different repo. Reconnect in **Settings → Connectors** and re-authorize for this repo.
-- **Commit lands but no LINE message.** Check the Routine log — the skill prints `LINE: skipped (env missing)` or `LINE ERROR: status=... body=...` verbatim. No retries happen by design.
-- **The brief repeats yesterday's stories.** The 24h freshness check is against the publisher's own timestamp; stories republished on a new URL may re-surface. Tighten [`reference/trusted-sources.md`](./.claude/skills/daily-ai-news/reference/trusted-sources.md) or add a "recently seen URLs" note at the top of the skill run.
-- **"No verifiable stories" in sources.md.** The skill refuses to fabricate — expected behavior when the news day is genuinely quiet or when `WebFetch` is being blocked by a source. Re-run in a few hours or allow-list another publisher.
+- **Commit lands but no LINE message.** Check the Routine log — the skill prints `LINE: skipped (env missing)`, `LINE ERROR: status=... body=...`, or `LINE EGRESS BLOCKED: ...` verbatim. No retries happen by design. The committed article will also carry a `🔕 LINE not delivered` marker.
+- **Env resolution table shows `(source: defaults.json)` for GitHub vars and `***missing***` for LINE.** Cloud Environment (`ClaudeBot_Line`) is attached but its values are not reaching the model context — known limitation on the current Routine platform. Paste LINE secrets inline in the invocation prompt as a workaround; see the prompt template in "Running in Claude Web Routine".
+- **Every WebFetch returns 403 (even to `example.com`).** The runtime has no outbound network for `WebFetch`. The skill auto-falls-back to `WEBFETCH_BLOCKED` mode (Tier 2 — WebSearch snippets), commits with `[verify=search]`, and the article carries a banner saying so. If you want fresh Tier-1 articles, the fix is at the Routine platform level (egress policy), not the skill.
+- **"No verifiable stories" in sources.md.** Means `WebSearch` returned zero usable snippets from trusted-source domains too. Genuinely quiet news day or search quota issue. Re-run later; don't loosen [`reference/trusted-sources.md`](./.claude/skills/daily-ai-news/reference/trusted-sources.md) just to fill the quota.
+- **The brief repeats yesterday's stories.** Check `Published:` in [`reference/sources.md`](./.claude/skills/daily-ai-news/reference/sources.md). Tier-2 stories derive the date from the search snippet, which can be stale on slow news days.
 
 ## License
 

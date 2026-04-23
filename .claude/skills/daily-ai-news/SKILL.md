@@ -68,31 +68,62 @@ Do **not** invent values. Do **not** treat literal placeholder strings like `<fr
 
 Open `reference/trusted-sources.md` and treat it as the allow-list. Prefer sources from that list; do **not** invent outlets.
 
-1. Use `WebSearch` with queries like:
-   - `AI news` with a date filter for the last 24h (include Thai queries: `ข่าว AI`, `ปัญญาประดิษฐ์ วันนี้`).
-   - Targeted queries per trusted source (e.g. `site:techcrunch.com AI`, `site:blognone.com AI`).
-2. For each candidate, use `WebFetch` to open the URL and extract:
-   - Final canonical URL (follow redirects; reject paywall-only or login-walled pages).
-   - Headline, publisher, publish timestamp (must be within the last 24h in the source's own timezone; be generous at the edges).
-   - A 1–2 sentence factual summary, in your own words.
-3. Select **exactly 5** stories. Mix: aim for ≥1 Thai-language source and ≥3 international sources. Prefer primary announcements over commentary.
-4. Write the verified list to `reference/sources.md` using this exact template — overwrite the file:
+### 1a. Gather candidates with `WebSearch`
+
+Use `WebSearch` with queries like:
+- `AI news` with a date filter for the last 24h (include Thai queries: `ข่าว AI`, `ปัญญาประดิษฐ์ วันนี้`).
+- Targeted queries per trusted source (e.g. `site:techcrunch.com AI`, `site:blognone.com AI`).
+
+Capture for each candidate: URL, title, publisher (inferred from domain vs trusted-sources list), and the **search-result snippet** verbatim.
+
+### 1b. Verification — tiered (handles egress-blocked runtimes)
+
+Each story is assigned a verification tier. Do a quick `WebFetch` probe on one trusted URL (e.g. `https://example.com`) at the start of this step to detect whether WebFetch works at all in this runtime. Label the runtime:
+
+- **`WEBFETCH_OK`** — probe returned 2xx.
+- **`WEBFETCH_BLOCKED`** — probe returned 403 / network error (typical in Claude Web Routine today).
+
+Then for each candidate:
+
+| Tier | Requirements | Allowed when |
+|---|---|---|
+| **Tier 1 — Full fetch** | `WebFetch` returns 2xx for the URL; body contains the headline and a timestamp ≤ 24h old | `WEBFETCH_OK` |
+| **Tier 2 — Search snippet** | URL's domain is on `reference/trusted-sources.md`; `WebSearch` result includes a substantive snippet and publishedTime (or a date in the snippet); **summary must paraphrase only what's in the snippet** | always — but only the sole option when `WEBFETCH_BLOCKED` |
+| **Drop** | Can't satisfy Tier 1 or Tier 2 | — |
+
+**Never** cite a URL that you could not at least see in a `WebSearch` result for a trusted-source domain. Search engines don't invent URLs, so a URL present in search results is real. The risk is **staleness of the snippet**, not fabrication — mitigate by never asserting more than the snippet says.
+
+### 1c. Select exactly 5
+
+Select **exactly 5** stories. Mix: aim for ≥1 Thai-language source and ≥3 international sources. Prefer Tier 1 over Tier 2 when both are available for the same candidate. Prefer primary announcements over commentary.
+
+### 1d. Write `reference/sources.md`
+
+Overwrite the file with this template — the `Verification` line is required:
 
 ```markdown
 # Sources — {TODAY}
 
 Generated: {TODAY} (Asia/Bangkok)
+Runtime: {WEBFETCH_OK | WEBFETCH_BLOCKED}
 
 1. **{Headline}**
    - Publisher: {Publisher}
    - URL: {final URL}
-   - Published: {ISO timestamp as shown on page}
-   - Summary: {1–2 factual sentences, your words}
+   - Published: {ISO timestamp or "per search snippet"}
+   - Verification: {Tier 1 — WebFetch | Tier 2 — WebSearch snippet}
+   - Summary: {1–2 sentences, strictly from fetched body or snippet}
 
 2. ...
 ```
 
-If you cannot find 5 verifiable items, write however many you found and add a line `> Note: only N verified items found within 24h window.` — do not pad with fiction.
+If you cannot find 5 items at Tier 1 or Tier 2, write however many you found and add:
+```
+> Note: only N items verified this run ({WEBFETCH_OK|WEBFETCH_BLOCKED}).
+```
+Do not pad with fiction.
+
+If **zero** items were verified at any tier → skip Step 2–5, write a one-line stub to `articles/{TODAY}-brief.md` explaining the blocker, commit it (so the outage is visible), and still run Step 6 if `LINE_ENABLED`.
 
 ---
 
@@ -118,8 +149,14 @@ Create the first draft in memory (don't commit yet). Structure:
 
 Rules:
 - Every story references its source URL at least once via inline markdown link.
-- Do **not** invent quotes, numbers, dates, or names. If the source didn't say it, don't write it.
+- Do **not** invent quotes, numbers, dates, or names. If the source didn't say it (Tier 1 body) or if the snippet didn't say it (Tier 2), don't write it.
 - Thai-first prose; technical terms can stay in English.
+- **If any story is Tier 2**, add a small italic tag at the end of that story's paragraph:
+  `_(อ้างอิงจาก search snippet — WebFetch ไม่สามารถเข้าถึงหน้าต้นทางใน runtime นี้)_`
+- **If the whole article is Tier 2** (i.e. `WEBFETCH_BLOCKED`), prepend a blockquote immediately under the H1:
+  ```
+  > ⚠ WebFetch is unavailable in this Routine runtime. All stories below are cited from live search snippets on trusted-source domains; full-text verification was not possible. See `reference/sources.md` for tier breakdown.
+  ```
 
 ---
 
@@ -171,7 +208,7 @@ Target structure for the final file `articles/{TODAY}-brief.md`:
 - **สำหรับโปรแกรมเมอร์:** {1 concrete action}
 
 ---
-_Generated by the `daily-ai-news` skill on {TODAY} (Asia/Bangkok). Sources verified via WebFetch._
+_Generated by the `daily-ai-news` skill on {TODAY} (Asia/Bangkok). Verification mode: {WEBFETCH_OK | WEBFETCH_BLOCKED → WebSearch-snippet}._
 ```
 
 Save the final markdown as a string in memory — call it `ARTICLE_BODY` — for the commit step.
@@ -185,12 +222,20 @@ Save the final markdown as a string in memory — call it `ARTICLE_BODY` — for
 - `create_or_update_file` with params: `owner`, `repo`, `path`, `branch`, `message`, `content` (plain UTF-8 string; connector handles base64 if needed), optional `sha` for updates.
 - `push_files` with a `files` array.
 
-Do:
+### 5a. Idempotency check
+
+Before writing, call the connector's `get_file_contents` (or equivalent) for `articles/{TODAY}-brief.md` on `branch`. Three outcomes:
+
+- **Not found.** Create it. Proceed.
+- **Found, content byte-for-byte identical to `ARTICLE_BODY`.** Skip the commit. Log: `Run status: NO-OP (idempotent) — today's brief already committed at <existing SHA>`. Capture that SHA as `COMMIT_SHA` and **still proceed to Step 6** (LINE may have been skipped last time).
+- **Found, content differs.** Update with the returned `sha` — this is a meaningful re-run (e.g. the earlier run was `WEBFETCH_BLOCKED` and this one has fresh data).
+
+### 5b. Commit
 
 1. Set:
    - `path = articles/{TODAY}-brief.md`
    - `branch = GITHUB_BRANCH or "main"`
-   - `message = "brief: {TOPIC} {TODAY}"` where `{TOPIC}` is a ≤40-char summary of the day's dominant theme (e.g. `OpenAI ships new agent API`).
+   - `message = "brief: {TOPIC} {TODAY} [verify={webfetch|search}]"` where `{TOPIC}` is a ≤40-char summary of the day's dominant theme (e.g. `OpenAI ships new agent API`), and `verify=` reflects the runtime label from Step 1b.
    - `content = ARTICLE_BODY`
 2. Call the connector's create-or-update tool.
 3. If the response includes a commit SHA (typical field: `commit.sha` or `sha`), capture it as `COMMIT_SHA`. Otherwise attempt to read it back by calling the connector's `get_file_contents` / commit-list tool for the branch.
@@ -233,8 +278,17 @@ Send via **`WebFetch` with method POST** (no curl, no shell):
 On response:
 - **HTTP 200:** print `LINE: ok`.
 - **Non-200:** print `LINE ERROR: status={code} body={responseBody}`. **Do not retry.** The commit already landed — a failed notification is surfaced, not swallowed.
+- **Network/egress error** (e.g. `WEBFETCH_BLOCKED` also blocks `api.line.me`, or the runtime rejects POST): print `LINE EGRESS BLOCKED: <error>`. Do not retry.
 
-If `WebFetch` in the current environment doesn't allow POST with custom headers, say so explicitly and stop rather than falling back to a GET — never silently degrade.
+If LINE failed for any reason, also append a visible marker to the end of the committed article body and **update the commit** (via Step 5b update flow) so readers of the article know the notification didn't go out:
+
+```
+> 🔕 LINE notification for this brief was not delivered ({reason}). See the Routine log for the raw response.
+```
+
+This requires a second commit call — that's fine; do not retry LINE itself.
+
+If `WebFetch` in the current environment doesn't allow POST with custom headers at all, say so explicitly and stop rather than falling back to a GET — never silently degrade.
 
 ---
 
@@ -255,11 +309,15 @@ Print a compact summary to the user / routine log:
 | Condition | Action |
 |---|---|
 | GitHub connector missing | Abort before any work. Log clearly. |
+| `WEBFETCH_BLOCKED` (whole runtime) | Switch to Tier 2 (WebSearch snippet) for every story; banner at top of article; commit with `[verify=search]`. |
 | <5 verifiable stories | Proceed with what you have; note the shortfall in sources.md. |
-| URL unreachable / paywalled | Drop that item, find another. Never invent. |
+| URL unreachable / paywalled (single story, `WEBFETCH_OK` runtime) | Drop that item; try Tier 2 for it; if both fail, skip it. |
 | GitHub commit fails | Surface the error. Do not continue to LINE. |
+| Today's article already committed, content identical | NO-OP commit; still attempt LINE (it may have been skipped last time). |
+| Today's article already committed, content differs | Update via the returned SHA. |
 | LINE env missing | Skip step 6. Commit is still the success criterion. |
-| LINE API non-200 | Log status + body. No retry. |
+| LINE API non-200 | Log status + body. Append `🔕 LINE not delivered` marker to article, update commit. No retry. |
+| LINE egress blocked (runtime can't reach api.line.me) | Same as non-200 — log, mark, no retry. |
 
 ## Files this skill touches
 
