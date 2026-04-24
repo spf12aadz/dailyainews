@@ -1,41 +1,41 @@
-# Sources — 2026-04-23
+# Sources — 2026-04-24
 
-Generated: 2026-04-23 (Asia/Bangkok)
+Generated: 2026-04-24 (Asia/Bangkok)
 Runtime: WEBFETCH_BLOCKED
 
-1. **Google Cloud launches two new AI chips to compete with Nvidia**
+> Note: WebFetch probe to https://example.com returned 403 in this Routine runtime. All items below are Tier 2 — verified by WebSearch snippet on a trusted-sources.md domain. URLs were returned by the search engine (not fabricated); summaries paraphrase only what the snippet asserts.
+
+1. **OpenAI releases GPT-5.5, bringing company one step closer to an AI 'super app'**
    - Publisher: TechCrunch
-   - URL: https://techcrunch.com/2026/04/22/google-cloud-next-new-tpu-ai-chips-compete-with-nvidia/
-   - Published: 2026-04-22 (per search snippet)
+   - URL: https://techcrunch.com/2026/04/23/openai-chatgpt-gpt-5-5-ai-model-superapp/
+   - Published: per search snippet (2026-04-23)
    - Verification: Tier 2 — WebSearch snippet
-   - Summary: TechCrunch รายงานว่า Google Cloud เปิดตัว TPU รุ่นใหม่ที่ "เร็วกว่าและถูกกว่ารุ่นก่อน" แต่ยังคงใช้ GPU ของ Nvidia คู่กันในบริการคลาวด์ของตัวเอง
+   - Summary: OpenAI released GPT-5.5, which the company calls its "smartest and most intuitive to use" model yet. It is rolling out to Plus, Pro, Business, and Enterprise users in ChatGPT, with GPT-5.5 Pro going to Pro/Business/Enterprise. The release is framed as a step toward a "super app" combining ChatGPT, Codex, and an AI browser.
 
-2. **Google Releases New AI Agents to Challenge OpenAI and Anthropic**
-   - Publisher: Bloomberg
-   - URL: https://www.bloomberg.com/news/articles/2026-04-22/google-releases-new-ai-agents-to-challenge-openai-and-anthropic
-   - Published: 2026-04-22 (per search snippet)
+2. **Anthropic and Amazon expand collaboration for up to 5 gigawatts of new compute**
+   - Publisher: Anthropic
+   - URL: https://www.anthropic.com/news/anthropic-amazon-compute
+   - Published: per search snippet (2026-04-21)
    - Verification: Tier 2 — WebSearch snippet
-   - Summary: Bloomberg รายงานว่าในงานประจำปีที่ลาสเวกัส ฝ่ายคลาวด์ของ Google เปิดตัวชุดเครื่องมือสร้าง AI agent สำหรับองค์กร ติดตามงานที่เอเจนต์ทำ รวมถึงกล่องข้อความเฉพาะสำหรับให้เอเจนต์แจ้งความคืบหน้า
+   - Summary: Anthropic signed a new agreement with Amazon securing up to 5 GW of capacity for training and deploying Claude, including new Trainium2 capacity in the first half of 2026 and nearly 1 GW of Trainium2/Trainium3 online by year-end. Anthropic commits over $100B to AWS over ten years; Amazon invests $5B now with up to $20B more to follow.
 
-3. **Introducing workspace agents in ChatGPT**
-   - Publisher: OpenAI
-   - URL: https://openai.com/index/introducing-workspace-agents-in-chatgpt/
-   - Published: 2026-04-22 (per search snippet)
-   - Verification: Tier 2 — WebSearch snippet
-   - Summary: OpenAI เปิดตัว workspace agents ใน ChatGPT เปิดให้ทีมสร้างเอเจนต์ที่ใช้ร่วมกันได้ ขับเคลื่อนด้วย Codex ทำงานในคลาวด์ได้ต่อเนื่อง อยู่ใน research preview บน ChatGPT Business/Enterprise/Edu/Teachers ใช้ฟรีถึง 6 พฤษภาคม 2026 จากนั้นคิดค่าใช้งานแบบเครดิต
-
-4. **OpenAI อัปเดต ChatGPT Images 2.0 กำหนดรายละเอียดได้ดีขึ้น ข้อความในภาพแม่นยำ รองรับหลายภาษา**
+3. **OpenAI อัปเดต ChatGPT Images 2.0 กำหนดรายละเอียดได้ดีขึ้น ข้อความในภาพแม่นยำ รองรับหลายภาษา**
    - Publisher: Blognone
    - URL: https://www.blognone.com/node/150318
-   - Published: 2026-04-22 (per search snippet)
+   - Published: per search snippet (ปลายเมษายน 2026)
    - Verification: Tier 2 — WebSearch snippet
-   - Summary: Blognone รายงานว่า OpenAI เปิดตัว ChatGPT Images 2.0 เพิ่ม Thinking mode สำหรับผู้ใช้ Pro ค้นเว็บแบบเรียลไทม์ขณะสร้างภาพ และสร้างหลายภาพจาก prompt เดียว
+   - Summary: Blognone รายงานว่า OpenAI อัปเดต ChatGPT Images 2.0 ที่ทำตามคำสั่งผู้ใช้ได้แม่นยำขึ้น กำหนดรายละเอียดได้ดีขึ้น ข้อความในภาพแม่นยำ และรองรับหลายภาษา กระจายผ่าน ChatGPT และผู้ช่วยโค้ด Codex
 
-5. **กูเกิลเปิดตัว TPU รุ่นที่ 8 แยกชิปฝึกโมเดลออกจากชิปรัน**
+4. **Google rolls out Gemini in Chrome in APAC countries**
+   - Publisher: TechCrunch
+   - URL: https://techcrunch.com/2026/04/20/google-rolls-out-gemini-in-chrome-in-seven-new-countries/
+   - Published: per search snippet (2026-04-20)
+   - Verification: Tier 2 — WebSearch snippet
+   - Summary: Google expanded Gemini in Chrome — previously US-only, then India/Canada/New Zealand in March — to additional APAC countries. The agentic feature that controls the browser to complete tasks remains in testing and is only available to AI Pro and AI Ultra paid users in the US.
+
+5. **OpenAI เปิดตัว GPT‑Rosalind โมเดล AI สำหรับงานวิจัยด้าน Life science**
    - Publisher: Blognone
-   - URL: https://www.blognone.com/node/150325
-   - Published: 2026-04-23 (per search snippet)
+   - URL: https://www.blognone.com/node/150283
+   - Published: per search snippet (กลางเมษายน 2026)
    - Verification: Tier 2 — WebSearch snippet
-   - Summary: Blognone สรุปว่า Google เปิดตัว TPU รุ่น 8 แยกเป็น TPU 8t สำหรับฝึกโมเดล และ TPU 8i สำหรับรันโมเดล โดย 8t รองรับ FP4 ผ่าน MXU cores เชื่อมชิปผ่าน Virgo Network ได้สูงสุด 134,000 ชิป แบนด์วิดท์รวม 47 Pb/s ประมวลผล 1.6 ล้าน ExaFLOPS
-
-> Note: Runtime is WEBFETCH_BLOCKED — all 5 items verified via WebSearch snippets on trusted-source domains. Full-text verification was not possible in this Routine runtime.
+   - Summary: Blognone รายงานการเปิดตัว GPT‑Rosalind โมเดล reasoning ของ OpenAI ที่ออกแบบมาสำหรับงานวิจัยด้านชีววิทยา การค้นพบยา และเวชศาสตร์เชิงแปล โดยปรับจูนสำหรับเวิร์กโฟลว์วิทยาศาสตร์ ครอบคลุมเคมี วิศวกรรมโปรตีน และจีโนมิกส์
