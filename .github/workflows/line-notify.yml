@@ -63,19 +63,21 @@ jobs:
             exit 0
           fi
 
-          # 3. Extract title + up to 3 TL;DR bullets.
+          # 3. Extract title + one-line summary per story.
+          # Story headings look like:
+          #   ### 1. <title> — [<publisher>](<url>)
+          # We strip the "### " prefix and replace the markdown link with
+          # just the publisher name, giving e.g.:
+          #   1. <title> — <publisher>
           TITLE=$(grep -m1 '^# ' "$FILE" | sed 's/^# *//' || echo "สรุปข่าว AI")
-          TLDR=$(awk '
-            /^> TL;DR/ { flag = 1; next }
-            flag && /^> - / { sub(/^> - /, "• "); print; count++ }
-            flag && $0 !~ /^>/ { flag = 0 }
-            count >= 3 { exit }
-          ' "$FILE")
+          STORIES=$(grep -E '^### [0-9]+\. ' "$FILE" \
+            | sed -E 's/^### //' \
+            | sed -E 's/ — \[([^]]+)\]\([^)]+\)/ — \1/')
 
           PERMALINK="https://github.com/${GH_REPO}/blob/${GH_SHA}/${FILE}"
 
-          MESSAGE=$(printf '📰 %s\n\nTL;DR\n%s\n\nอ่านฉบับเต็ม: %s' \
-            "$TITLE" "$TLDR" "$PERMALINK")
+          MESSAGE=$(printf '📰 %s\n\n%s\n\nอ่านฉบับเต็ม: %s' \
+            "$TITLE" "$STORIES" "$PERMALINK")
 
           # 4. Build JSON safely — jq handles escaping.
           PAYLOAD=$(jq -n \
