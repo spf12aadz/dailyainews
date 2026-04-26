@@ -63,16 +63,30 @@ jobs:
             exit 0
           fi
 
-          # 3. Extract title + one-line summary per story.
-          # Story headings look like:
-          #   ### 1. <title> — [<publisher>](<url>)
-          # We strip the "### " prefix and replace the markdown link with
-          # just the publisher name, giving e.g.:
-          #   1. <title> — <publisher>
+          # 3. Build the LINE message body.
+          # For each story heading "### N. <title> — [<publisher>](<url>)"
+          # we emit:
+          #   N. <title> — <publisher>
+          #      <first body line, truncated to ~140 chars>
+          # Python handles Unicode-correct length and truncation.
           TITLE=$(grep -m1 '^# ' "$FILE" | sed 's/^# *//' || echo "สรุปข่าว AI")
-          STORIES=$(grep -E '^### [0-9]+\. ' "$FILE" \
-            | sed -E 's/^### //' \
-            | sed -E 's/ — \[([^]]+)\]\([^)]+\)/ — \1/')
+          STORIES=$(python3 - "$FILE" <<'PY'
+          import re, sys
+          text = open(sys.argv[1], encoding='utf-8').read()
+          pattern = re.compile(
+              r'^### (\d+)\. (.+?) — \[([^\]]+)\]\([^)]+\)\s*\n\s*\n([^\n]+)',
+              re.MULTILINE,
+          )
+          blocks = []
+          for m in pattern.finditer(text):
+              n, title, pub, body = m.group(1), m.group(2), m.group(3), m.group(4).strip()
+              body = re.sub(r'\s+', ' ', body)
+              if len(body) > 140:
+                  body = body[:137].rstrip() + '...'
+              blocks.append(f"{n}. {title} — {pub}\n   {body}")
+          print('\n\n'.join(blocks))
+          PY
+          )
 
           PERMALINK="https://github.com/${GH_REPO}/blob/${GH_SHA}/${FILE}"
 
