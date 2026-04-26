@@ -145,10 +145,7 @@ Rules:
 - Thai-first prose; technical terms can stay in English.
 - **If any story is Tier 2**, add a small italic tag at the end of that story's paragraph:
   `_(อ้างอิงจาก search snippet — WebFetch ไม่สามารถเข้าถึงหน้าต้นทางใน runtime นี้)_`
-- **If the whole article is Tier 2** (i.e. `WEBFETCH_BLOCKED`), prepend a blockquote immediately under the H1:
-  ```
-  > ⚠ WebFetch is unavailable in this Routine runtime. All stories below are cited from live search snippets on trusted-source domains; full-text verification was not possible. See `reference/sources.md` for tier breakdown.
-  ```
+- **Do NOT add a top-of-article banner** when the runtime is `WEBFETCH_BLOCKED`. The verification mode is already surfaced in four other places (commit message `[verify=search]`, `reference/sources.md` `Runtime:` line, per-story italic tags, and the footer `Verification mode:` line) — a top banner adds visual noise without new information. Keep the article body clean for the reader.
 
 ---
 
