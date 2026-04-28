@@ -85,9 +85,9 @@ Then for each candidate:
 
 **Never** cite a URL that you could not at least see in a `WebSearch` result for a trusted-source domain. Search engines don't invent URLs, so a URL present in search results is real. The risk is **staleness of the snippet**, not fabrication — mitigate by never asserting more than the snippet says.
 
-### 1c. Select exactly 2
+### 1c. Select exactly 5
 
-Select **exactly 2** stories. Mix: aim for ≥1 Thai-language source and ≥1 international sources. Prefer Tier 1 over Tier 2 when both are available for the same candidate. Prefer primary announcements over commentary.
+Select **exactly 5** stories. Mix: aim for ≥1 Thai-language source and ≥3 international sources. Prefer Tier 1 over Tier 2 when both are available for the same candidate. Prefer primary announcements over commentary.
 
 ### 1d. Write `reference/sources.md`
 
@@ -150,7 +150,7 @@ Rules:
 
 ## Step 3 — Three perspectives
 
-For each of the 2 stories, produce a short reaction from **two personas**. Write them to `reference/perspectives.md` (overwrite) using this layout:
+For each of the 5 stories, produce a short reaction from **three personas**. Write them to `reference/perspectives.md` (overwrite) using this layout:
 
 ```markdown
 # Perspectives — {TODAY}
