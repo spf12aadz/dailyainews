@@ -1,39 +1,41 @@
-# Sources — 2026-04-29
+# Sources — 2026-05-05
 
-Generated: 2026-04-29 (Asia/Bangkok)
-Runtime: WEBFETCH_OK
+Generated: 2026-05-05 (Asia/Bangkok)
+Runtime: WEBFETCH_BLOCKED
 
-1. **Claude for Creative Work**
+1. **Building a new enterprise AI services company with Blackstone, Hellman & Friedman, and Goldman Sachs**
    - Publisher: Anthropic
-   - URL: https://www.anthropic.com/news/claude-for-creative-work
-   - Published: 2026-04-28
-   - Verification: Tier 1 — WebFetch
-   - Summary: Anthropic launched integrations between Claude and major creative software including Adobe, Blender, Autodesk, and Ableton through new MCP connectors. These tools let creatives use Claude directly inside their existing applications to accelerate workflows and automate repetitive tasks.
+   - URL: https://www.anthropic.com/news/enterprise-ai-services-company
+   - Published: 2026-05-04 (per search snippet)
+   - Verification: Tier 2 — WebSearch snippet
+   - Summary: Anthropic announced a new enterprise AI services company backed by $1.5B in committed capital from Blackstone, H&F, Goldman Sachs, and a consortium including General Atlantic, Apollo, GIC, and Sequoia. The venture will embed Anthropic engineers directly into mid-size businesses to build Claude-powered solutions. On the same day, OpenAI announced "The Deployment Company," a $10B JV with TPG, Brookfield, and Bain Capital.
 
-2. **The Download: Musk and Altman's Legal Showdown**
-   - Publisher: MIT Technology Review
-   - URL: https://www.technologyreview.com/2026/04/28/1136479/the-download-musk-altman-openai-trial-ai-profit-problem/
-   - Published: 2026-04-28
-   - Verification: Tier 1 — WebFetch
-   - Summary: Elon Musk is taking Sam Altman to court alleging he was deceived into funding OpenAI under a false non-profit premise, seeking $134 billion in damages and the removal of Altman and Brockman. The trial outcome could determine whether OpenAI can proceed with its planned IPO.
+2. **How OpenAI delivers low-latency voice AI at scale**
+   - Publisher: OpenAI
+   - URL: https://openai.com/index/delivering-low-latency-voice-ai-at-scale/
+   - Published: 2026-05-04 (per search snippet)
+   - Verification: Tier 2 — WebSearch snippet
+   - Summary: OpenAI published a technical post detailing its rearchitected WebRTC stack — a split relay + transceiver model serving 900M+ weekly active users — with global routing, fast connection setup, and minimal jitter for natural-feeling voice conversation.
 
-3. **Project Deal: our Claude-run marketplace experiment**
-   - Publisher: Anthropic
-   - URL: https://www.anthropic.com/features/project-deal
-   - Published: 2026-04-24
-   - Verification: Tier 1 — WebFetch
-   - Summary: In a one-week internal experiment, 69 Claude agents completed 186 deals worth over $4,000 in a real secondhand marketplace with no human intervention. Stronger Opus 4.5 agents outperformed Haiku 4.5 agents by $2.68 per item sold on average, but participants using the weaker model never noticed the gap — raising concerns about silent inequality in AI-mediated markets.
+3. **New Gemini capabilities in Google Docs help you go from blank page to brilliance**
+   - Publisher: Google Workspace Blog (official Google blog)
+   - URL: https://workspaceupdates.googleblog.com/2026/04/new-gemini-capabilities-in-google-docs-help-you-go-from-blank-page-to-brilliance.html
+   - Published: gradual rollout from 2026-05-04 (per search snippet; article dated April 2026)
+   - Verification: Tier 2 — WebSearch snippet
+   - Summary: Gemini customization features rolled out across Docs, Sheets, Slides, and Drive from May 4, allowing stored instructions and cross-app data synthesis (Gmail, Calendar, Drive) to auto-generate formatted documents. A new AI control center in the Admin console gives enterprise admins granular control over AI agent access to Workspace data.
 
-4. **The Missing Step Between Hype and Profit**
-   - Publisher: MIT Technology Review
-   - URL: https://www.technologyreview.com/2026/04/27/1136456/the-missing-step-between-hype-and-profit/
-   - Published: 2026-04-27
-   - Verification: Tier 1 — WebFetch
-   - Summary: A Mercor study found AI agents tested on 480 real workplace tasks in banking, consulting, and law failed to complete most duties. MIT Technology Review argues the gap between AI hype and actual workplace profitability is poorly understood, with companies unable to show concrete evidence of how AI investment translates to organizational transformation.
+4. **NVIDIA Advances Robot Learning, Humanoid Development With New AI and Simulation Tools**
+   - Publisher: NVIDIA Blog
+   - URL: https://blogs.nvidia.com/blog/robot-learning-humanoid-development/
+   - Published: per search snippet (GTC 2026 era, circa March–April 2026)
+   - Verification: Tier 2 — WebSearch snippet
+   - Summary: NVIDIA released Isaac GR00T open models for natural-language-following robots and Cosmos world models for synthetic training data generation at scale. The RoboLab benchmark suite on Isaac and Omniverse provides standardized evaluation for generalist robot policies; ABB Robotics and others are already adopting these tools in industrial settings.
 
-5. **[Appfigures] จำนวนแอปออกใหม่เพิ่มสูงในช่วงไม่กี่เดือนที่ผ่านมา คาดเป็นผลจาก AI ช่วยเขียนโค้ด**
+5. **ส่วนแบ่งตลาด AI องค์กร OpenAI ยังแชมป์ แต่ Anthropic ทิ้งขาดในกลุ่มลูกค้าใหม่ปี 2026**
    - Publisher: Blognone
-   - URL: https://www.blognone.com/node/150303
-   - Published: 2026-04-20
-   - Verification: Tier 1 — WebFetch
-   - Summary: Appfigures reported a 60% surge in new app releases during Q1 2026 vs the prior year, with April 2026 showing a 104% year-over-year spike. The analysis attributes the boom to AI-assisted coding tools lowering the technical barrier for developers with existing ideas, especially in productivity, utilities, and health categories.
+   - URL: https://www.blognone.com/node/150072
+   - Published: per search snippet (covering Ramp February 2026 data)
+   - Verification: Tier 2 — WebSearch snippet
+   - Summary: ข้อมูล Ramp รายงานการใช้ AI ในองค์กรสหรัฐแตะ 47.6% โดย OpenAI ครองตลาด 34.4% (ลดลง) ขณะที่ Anthropic พุ่งขึ้นสู่ 24.4% และ Google Gemini ยังต่ำกว่า 5% ในตลาดองค์กร สอดรับกับการประกาศ JV ขนาดใหญ่ของ Anthropic วันที่ 4 พฤษภาคม
+
+> Note: Runtime WEBFETCH_BLOCKED — all 5 items verified at Tier 2 (WebSearch snippet from trusted-source domains). Stories 1–3 dated May 4, 2026. Story 4 is from GTC 2026 era (March–April). Story 5 covers Ramp February 2026 data reported by Blognone.
