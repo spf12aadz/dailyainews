@@ -1,6 +1,6 @@
-# Sources — 2026-05-07
+# Sources — 2026-05-08
 
-Generated: 2026-05-07 (Asia/Bangkok)
+Generated: 2026-05-08 (Asia/Bangkok)
 Runtime: WEBFETCH_OK
 
 1. **Higher usage limits for Claude and a compute deal with SpaceX**
@@ -8,32 +8,32 @@ Runtime: WEBFETCH_OK
    - URL: https://www.anthropic.com/news/higher-limits-spacex
    - Published: 2026-05-06
    - Verification: Tier 1 — WebFetch
-   - Summary: Anthropic signed an agreement with SpaceX to access the Colossus 1 data center (300+ MW, 220,000+ NVIDIA GPUs). Simultaneously doubled Claude Code rate limits for Pro, Max, Team, and Enterprise plans and removed peak-hours restrictions for Pro and Max.
+   - Summary: Anthropic doubled Claude Code's rate limits for Pro/Max/Team/Enterprise and secured access to SpaceX's Colossus 1 data center, adding 300+ MW of capacity with 220,000+ NVIDIA GPUs available within a month.
 
 2. **Agents for financial services**
    - Publisher: Anthropic
    - URL: https://www.anthropic.com/news/finance-agents
    - Published: 2026-05-05
    - Verification: Tier 1 — WebFetch
-   - Summary: Anthropic released 10 ready-to-run agent templates for financial services (pitchbook development, KYC screening, month-end closing) with Microsoft 365 integration and 8 new data partners including Dun & Bradstreet, Moody's, and Verisk. Claude Opus 4.7 leads the Vals AI Finance Agent benchmark at 64.37%.
+   - Summary: Anthropic launched 10 ready-to-run agent templates for financial services covering research, pitchbook creation, compliance screening, and month-end close, powered by Claude Opus 4.7 and integrated with Moody's, D&B, FactSet, and other major data providers.
 
-3. **Building a new enterprise AI services company with Blackstone, Hellman & Friedman, and Goldman Sachs**
-   - Publisher: Anthropic
-   - URL: https://www.anthropic.com/news/enterprise-ai-services-company
-   - Published: 2026-05-04
+3. **NVIDIA and ServiceNow Partner on New Autonomous AI Agents for Enterprises**
+   - Publisher: NVIDIA Blog
+   - URL: https://blogs.nvidia.com/blog/servicenow-autonomous-ai-agents-enterprises/
+   - Published: 2026-05-05
    - Verification: Tier 1 — WebFetch
-   - Summary: Anthropic partnered with major financial firms (Blackstone, H&F, Goldman Sachs, with backing from General Atlantic, Apollo, GIC, and Sequoia) to establish a new AI services company targeting mid-sized businesses. Applied AI engineers from Anthropic will build custom Claude-powered solutions alongside partner teams.
+   - Summary: NVIDIA and ServiceNow announced joint development of enterprise autonomous agents — Project Arc (long-running desktop agent), OpenShell (secure open-source runtime), and AI-Q Blueprint — with Blackwell delivering 50x better token output per watt and 35x lower cost per million tokens vs. the previous generation.
 
-4. **The new war room: Military AI chatbots enter strategic command centers**
-   - Publisher: MIT Technology Review
-   - URL: https://www.technologyreview.com/2026/05/06/1136917/the-download-seafloor-science-military-ai-chatbots/
-   - Published: 2026-05-06
+4. **Powering the Next American Century: US Energy Secretary Chris Wright and NVIDIA's Ian Buck on the Genesis Mission**
+   - Publisher: NVIDIA Blog
+   - URL: https://blogs.nvidia.com/blog/energy-secretary-chris-wright-ian-buck/
+   - Published: 2026-05-07
    - Verification: Tier 1 — WebFetch
-   - Summary: Both the US and China are integrating conversational AI into military war rooms for strategic decision-making, including target selection. The article raises concerns about AI errors, lack of transparency, and tech company influence over military information.
+   - Summary: The US Department of Energy and NVIDIA are deploying AI supercomputers across 17 national labs via the Genesis Mission, with AI expected to compress grid interconnection studies from years to weeks; two new Argonne supercomputers with 10,000 and 100,000 GPUs are under construction.
 
-5. **[ลือ] iOS 27 จะเปิดให้เลือกโมเดล AI ที่ต้องการได้ ไม่จำกัดที่ Gemini**
-   - Publisher: Blognone
-   - URL: https://www.blognone.com/node/150454
-   - Published: 2026-05-06
+5. **AI for All Thais เมื่อปัญญาประดิษฐ์ไม่ใช่แค่เครื่องมือ แต่คือเครื่องยนต์ใหม่ขับเคลื่อนประเทศไทย**
+   - Publisher: Beartai
+   - URL: https://www.beartai.com/read/1500318/
+   - Published: 2026-05-05
    - Verification: Tier 1 — WebFetch
-   - Summary: Mark Gurman/Bloomberg reports that iOS 27, iPadOS 27, and macOS 27 will allow users to choose any AI model provider for Siri and writing assistance, replacing the current Gemini-only setup. A new Create Pass feature for Apple Wallet is also rumored.
+   - Summary: True Corporation, Google, and Thailand's Ministry of Higher Education launched the AI for All Thais initiative targeting AI skills training for 12 million Thais by 2030, with 20+ universities piloting a 45-hour Gemini Academy curriculum amid an 80,000-person AI talent shortage.
