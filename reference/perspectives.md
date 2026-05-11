@@ -1,31 +1,31 @@
-# Perspectives — 2026-05-08
+# Perspectives — 2026-05-11
 
-## 1. Anthropic จับมือ SpaceX ได้ GPU 220,000+ ตัว พร้อมเพิ่ม rate limit Claude Code 2 เท่า
+## 1. Introducing workspace agents in ChatGPT
 
-**อาจารย์ (มหาวิทยาลัย):** AI frontier กำลังกลายเป็น compute-intensive infrastructure ระดับชาติ การที่ Anthropic ต้องเข้าถึง GPU ผ่านดีลกับ SpaceX แสดงให้นักศึกษาเห็นว่า compute ไม่ใช่แค่ฮาร์ดแวร์ แต่คือปัจจัยการผลิตเชิงกลยุทธ์ไม่แพ้น้ำมันในยุคอุตสาหกรรม
-**ผู้เชี่ยวชาญด้าน AI:** 220,000 GPU เพิ่มเติมจาก Colossus 1 ช่วย Anthropic diversify แหล่ง compute ออกจาก Amazon/Google ลดความเสี่ยงการพึ่งพิง cloud รายเดียว กำลัง 5 GW จากหลายดีลที่ทยอยเปิดใช้งานบ่งชี้ว่า AI inference scale กำลังแตะระดับที่ต้องลงทุนโครงสร้างพื้นฐานระดับชาติ
-**โปรแกรมเมอร์มืออาชีพ:** Rate limits ที่เพิ่มเป็นสองเท่าและการยกเลิกข้อจำกัดช่วงพีคสำหรับ Claude Code เป็นผลกระทบที่จับต้องได้ทันที — developer ที่ใช้ Claude Code เป็น coding assistant หลักจะสังเกตเห็นการลด context switch ระหว่าง session อย่างชัดเจน
+**อาจารย์ (มหาวิทยาลัย):** Workspace Agents เป็นตัวอย่างของ "agentic AI" ที่นักศึกษาควรแยกให้ออกจาก chatbot ทั่วไป — ความแตกต่างหลักคือ shared context, permission scoping ระดับองค์กร และ long-running tasks ที่ทำงานต่อเนื่องแม้ไม่มีผู้ใช้อยู่หน้าจอ ห้องเรียนควรนำ architecture pattern นี้มาวิเคราะห์เรื่อง delegation of authority และ accountability
+**ผู้เชี่ยวชาญด้าน AI:** การเปลี่ยนจาก "chatbot as tool" ไปสู่ "agent as coworker" ที่ขับเคลื่อนด้วย Codex และทำงาน asynchronously ใน cloud เป็น architectural shift ที่แท้จริง ความเสี่ยงที่ต้องระวังคือ data leakage ผ่าน third-party integrations ที่องค์กรต้องตรวจสอบ permission model อย่างละเอียด
+**โปรแกรมเมอร์มืออาชีพ:** credit-based pricing ที่เริ่ม 6 พฤษภาคม หมายความว่าต้องออกแบบ workflow ให้ efficient ตั้งแต่แรก — agent ที่ run ซ้ำโดยไม่จำเป็นหรือ loop ผิดพลาดจะกิน cost จริงๆ ตรวจสอบ retry logic และ idempotency ก่อน deploy ใน production เสมอ
 
-## 2. Anthropic เปิด 10 AI Agent Templates สำหรับวงการเงิน
+## 2. NVIDIA and IREN: 5 GW AI Infrastructure
 
-**อาจารย์ (มหาวิทยาลัย):** 10 agent templates ที่ครอบคลุมตั้งแต่สร้าง pitchbook ไปถึง KYC screening เป็นตัวอย่างของ domain-specific AI ที่ต้องการ audit ผลลัพธ์ ไม่ใช่แค่ความสามารถในการใช้งาน นักศึกษาการเงินควรเรียนรู้ว่าการตรวจสอบ AI output มีความสำคัญไม่แพ้การใช้งาน
-**ผู้เชี่ยวชาญด้าน AI:** คะแนน 64.37% บน Vals AI Finance Agent benchmark น่าประทับใจ แต่ error rate ที่เหลือกว่า 35% หมายความว่า KYC screener และ Statement auditor ต้องมี human review loop ที่ชัดเจนก่อนนำไปใช้กับธุรกรรมที่มีความเสี่ยงสูง
-**โปรแกรมเมอร์มืออาชีพ:** Integration กับ Microsoft 365 ครบทั้ง Excel, PowerPoint, Word, Outlook ลดแรงเสียดทาน adoption ลงมาก แต่ควรตรวจสอบ data residency และ compliance ของ partners ใหม่ทั้ง 8 ราย โดยเฉพาะ Dun & Bradstreet และ Verisk ก่อน deploy ใน environment ที่มี regulatory requirements
+**อาจารย์ (มหาวิทยาลัย):** 5 gigawatts เทียบเท่ากับโรงไฟฟ้านิวเคลียร์ขนาดกลางประมาณ 5 โรง — สเกลของ AI infrastructure ปัจจุบันกำลังก้าวข้ามขีดจำกัดของ data center แบบเดิมและกลายเป็นประเด็นนโยบายพลังงานระดับชาติ ซึ่งควรบูรณาการเข้ากับการสอนด้านสิ่งแวดล้อมและนโยบายสาธารณะด้วย
+**ผู้เชี่ยวชาญด้าน AI:** DSX AI factory architecture คือ NVIDIA's integrated stack ที่ lock-in compute, networking และ software เข้าด้วยกัน ข้อดีคือ operational efficiency สูง แต่ต้องตั้งคำถามเรื่อง vendor concentration risk — ผู้ให้บริการ cloud รายเล็กที่พึ่งพา NVIDIA stack อย่างเดียวอาจมีอำนาจต่อรองน้อยลงเมื่อ contract ต่ออายุ
+**โปรแกรมเมอร์มืออาชีพ:** สัญญาณที่ชัดเจนว่า hyperscale compute จะ available มากขึ้นสำหรับ inference workloads ในอีก 2-3 ปี latency และ cost สำหรับ real-time AI applications จะลดลงอย่างมีนัยสำคัญ ออกแบบระบบให้รองรับ capacity ที่เพิ่มขึ้นตั้งแต่วันนี้
 
-## 3. NVIDIA + ServiceNow เปิดตัว Autonomous AI Agents สำหรับองค์กร
+## 3. NVIDIA and Corning: US Manufacturing for AI Infrastructure
 
-**อาจารย์ (มหาวิทยาลัย):** Project Arc ในฐานะ long-running desktop agent ที่เชื่อมต่อกับ file system และ terminal เปิดประเด็นสำคัญเรื่อง autonomy ระยะยาวของ AI กับ human oversight นักศึกษา CS ควรศึกษาสถาปัตยกรรมนี้ในบริบทของ agent safety
-**ผู้เชี่ยวชาญด้าน AI:** OpenShell ในฐานะ open-source secure runtime สะท้อนว่า industry กำลัง shift ไปสู่ governance-first approach ในการ deploy agents Nemotron 3 Super ที่ครองอันดับ 1 บน EnterpriseOps-Gym ยืนยันว่า open models แข่งกับ closed models ได้จริงในงาน enterprise
-**โปรแกรมเมอร์มืออาชีพ:** Blackwell ที่ลด cost ต่อ million tokens ลง 35 เท่าเมื่อเทียบกับ Hopper เปลี่ยน economics ของ agent deployment อย่างมีนัยสำคัญ use case ที่เคย cost-prohibitive เช่น long-running research agents จะกลายเป็น viable ในปีนี้
+**อาจารย์ (มหาวิทยาลัย):** นี่คือตัวอย่างชั้นเยี่ยมของ "second-order effects" ของ AI — AI boom ไม่ได้สร้างงานแค่ใน tech sector แต่กระตุ้น manufacturing revival ในอุตสาหกรรม optical fiber ซึ่งเป็นโอกาสดีสำหรับสอนเรื่อง economic multiplier ของเทคโนโลยี
+**ผู้เชี่ยวชาญด้าน AI:** optical connectivity คือ bottleneck ที่แท้จริงของ GPU cluster scale-up — NVLink ภายใน rack มีประสิทธิภาพสูง แต่ถ้า external fiber capacity ไม่รองรับ traffic ที่เพิ่มขึ้นจาก AI workloads จะ choke ทั้งระบบ การขยาย capacity 10x ของ Corning ตอบสนองต่อ bottleneck นี้โดยตรง
+**โปรแกรมเมอร์มืออาชีพ:** สำหรับทีมที่ออกแบบ distributed AI systems ที่ต้องการ high-bandwidth low-latency communication ระหว่าง nodes ข่าวนี้บ่งบอกว่า optical interconnect standards กำลังถูก standardize ซึ่งจะลด complexity ของ infrastructure decisions ในอนาคต
 
-## 4. NVIDIA + กระทรวงพลังงานสหรัฐฯ ใช้ AI เร่งงานวิทยาศาสตร์และแก้วิกฤตพลังงาน
+## 4. จีนส่ง AI ยึดตลาดละครสั้น: 470 เรื่องต่อวัน
 
-**อาจารย์ (มหาวิทยาลัย):** Genesis Mission ที่ครอบคลุม 17 national labs รองรับงานวิจัย fusion, materials science และ grid optimization คือตัวอย่างที่ดีของ AI ในฐานะ scientific accelerator ควรให้นักศึกษาเห็นว่า AI เปลี่ยน pace ของวิทยาศาสตร์ได้ ไม่ใช่แค่เครื่องมือสร้างเนื้อหา
-**ผู้เชี่ยวชาญด้าน AI:** ความสามารถลด grid interconnection study จากปีเป็นสัปดาห์คือ high-impact application ที่มีผลต่อนโยบายพลังงานจริง ตัวเลข 30x performance gain ระหว่าง Hopper กับ Blackwell ยืนยันว่า hardware scaling ยังคง drive capability อย่างมีนัยสำคัญ
-**โปรแกรมเมอร์มืออาชีพ:** Argonne supercomputer ที่มี 100,000 GPU ในระบบเดียวสร้าง capability ที่เกินกว่า cloud instance ทั่วไป architectural patterns สำหรับ scientific computing ขนาดนี้จะ trickle down สู่ distributed AI infrastructure ระดับองค์กรในอีก 2-3 ปีข้างหน้า
+**อาจารย์ (มหาวิทยาลัย):** อุตสาหกรรมบันเทิงจีนกำลังแสดงให้เห็นว่า AI disruption ไม่ใช่แค่เรื่อง white-collar jobs แต่กระทบงานสร้างสรรค์ทุกระดับ นักศึกษาสายสื่อสารมวลชนและนิเทศศาสตร์ควรศึกษา business model ใหม่นี้ที่เน้น volume over quality เพื่อเตรียมรับมือการเปลี่ยนแปลงในวงการ
+**ผู้เชี่ยวชาญด้าน AI:** Seedance 2.0 ของ ByteDance และ Nadou Pro ของ iQIYI แสดงว่า video generation models ถึงระดับที่ commercial deployment ทำได้จริงแล้ว ปัญหา copyright digital likeness ที่เกิดขึ้นจะต้องการ technical solution ระดับ watermarking ที่ embed ตั้งแต่ generation stage ก่อนที่ regulation จะบังคับใช้
+**โปรแกรมเมอร์มืออาชีพ:** pattern ที่น่าสนใจคือ AI agents ใช้ probabilistic scaling แทน deterministic optimization — ผลิต 470 เรื่องแล้วปล่อยให้ตลาดเลือก แทนที่จะ optimize script เดียว สะท้อน architecture philosophy ของ LLMs ที่ scale พิสูจน์แล้วว่าชนะ quality ในหลาย domain
 
-## 5. AI for All Thais: ไทยตั้งเป้าอบรม 12 ล้านคน ปิดช่องว่าง AI talent 80,000 อัตรา
+## 5. MIT Technology Review: Blueprint for AI and Democracy
 
-**อาจารย์ (มหาวิทยาลัย):** โครงการที่ครอบคลุม 20+ มหาวิทยาลัยและ curriculum 45 ชั่วโมงเป็นโอกาสสำคัญสำหรับสถาบันการศึกษา แต่ต้องมั่นใจว่าเนื้อหาลึกพอสำหรับ advanced builders ไม่ใช่แค่ awareness training ระดับผิวเผิน
-**ผู้เชี่ยวชาญด้าน AI:** ช่องว่าง 80,000 คนสะท้อนปัญหาระดับโลก การผสาน AI Safety และ Prompt Engineering ใน curriculum ตั้งแต่ต้นเป็นทิศทางที่ถูกต้อง แต่ต้องการ iteration เร็วกว่า academic cycle ปกติเพราะ AI evolves เร็วกว่ามาก
-**โปรแกรมเมอร์มืออาชีพ:** Gemini Academy training และ data ฟรี 10 GB จาก True Corp ช่วย onboarding ระยะแรกได้ดี แต่ developers ที่ต้องการ advance ต้องการ platform ที่เปิดให้ทำ hands-on project จริงๆ ไม่ใช่แค่จบ coursework — capstone projects ที่ solve real problems คือตัวชี้วัดที่แท้จริง
+**อาจารย์ (มหาวิทยาลัย):** บทความนี้ให้ framework ที่ดีสำหรับการสอน AI ethics โดยแบ่ง impact เป็น 3 layer ที่ชัดเจน — epistemic, agentic, collective — ซึ่งนักศึกษาสามารถนำไปวิเคราะห์ผลกระทบต่อระบบการเลือกตั้ง นโยบายสาธารณะ และสิทธิพลเมืองได้อย่างมีโครงสร้าง
+**ผู้เชี่ยวชาญด้าน AI:** ข้อเสนอเรื่อง "faithfully represent user views" สำหรับ AI agents ในกระบวนการประชาธิปไตยขัดแย้งกับแนวโน้ม RLHF ปัจจุบันที่ models ถูก optimize ให้ตอบตาม preferences แทนที่จะให้ข้อมูล accurate — ต้องการ research agenda ที่แยก "user satisfaction" ออกจาก "epistemic accuracy"
+**โปรแกรมเมอร์มืออาชีพ:** identity verification สำหรับ AI agents ในกระบวนการ civic เป็น unsolved technical problem — ต้องการ cryptographic attestation layer ที่ต่างจาก human identity verification แบบเดิม และยังไม่มี open standard ใดที่ถูก adopt อย่างกว้างขวาง
